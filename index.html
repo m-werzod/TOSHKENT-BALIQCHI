@@ -1266,8 +1266,7 @@
 
     function ensureSplashFlow() {
       // If user lands directly on index.html, optionally force splash once per session:
-      // Uncomment to hard-enforce splash on first entry:
-      // if (!sessionStorage.getItem("tb_splash_done")) window.location.replace("splash.html");
+      if (!sessionStorage.getItem("tb_splash_done")) window.location.replace("splash.html");
     }
 
     function init() {

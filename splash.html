@@ -1,25 +1,22 @@
-
 <!doctype html>
 <html lang="uz" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#070b13" />
-  <title>TOSHKENT BALIQCHI — Splash</title>
+  <title>TOSHKENT BALIQCHI - Splash</title>
   <meta name="robots" content="noindex" />
   <style>
     :root{
-      --bg0:#05070d;
+      --bg0:#03050a;
       --bg1:#070b13;
-      --gold0:#ffcf4a;
-      --gold1:#ffb400;
-      --gold2:#ffea9b;
+      --gold0:#ffea9b;
+      --gold1:#ffcf4a;
+      --gold2:#ffb400;
+      --gold3:#ff8a00;
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --border: rgba(255,255,255,.14);
-      --shadow: 0 24px 90px rgba(0,0,0,.55);
-      --glass: blur(16px);
-      --radius: 26px;
+      --muted: rgba(255,255,255,.68);
+      --shadow: 0 28px 120px rgba(0,0,0,.6);
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -28,57 +25,50 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
       color: var(--text);
       background:
-        radial-gradient(1100px 680px at 15% 20%, rgba(255,180,0,.18), transparent 60%),
-        radial-gradient(900px 520px at 85% 30%, rgba(255,234,155,.10), transparent 60%),
-        radial-gradient(800px 500px at 50% 90%, rgba(58,160,255,.10), transparent 60%),
+        radial-gradient(900px 600px at 20% 15%, rgba(255,180,0,.22), transparent 60%),
+        radial-gradient(820px 540px at 85% 30%, rgba(255,234,155,.12), transparent 60%),
+        radial-gradient(700px 520px at 50% 90%, rgba(46,230,166,.08), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow:hidden;
     }
     .wrap{
       height:100%;
-      display:grid;
-      place-items:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap: 10px;
       padding: 22px;
-    }
-    .card{
-      width:min(560px, 100%);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      backdrop-filter: var(--glass);
-      box-shadow: var(--shadow);
-      overflow:hidden;
       position:relative;
       text-align:center;
-      padding: 26px 18px 18px;
     }
-    .sheen{
-      position:absolute; inset:-60% -40%;
-      background: conic-gradient(from 230deg,
-        rgba(255,180,0,0),
-        rgba(255,180,0,.22),
-        rgba(255,234,155,.16),
-        rgba(58,160,255,.12),
-        rgba(255,180,0,0));
-      filter: blur(16px);
-      animation: sheen 2.8s ease-in-out infinite;
+    .halo{
+      position:absolute;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,234,155,.22), rgba(255,180,0,.10) 40%, transparent 62%);
+      filter: blur(2px);
+      opacity:.95;
+      animation: pulse 3.2s ease-in-out infinite;
       pointer-events:none;
     }
-    @keyframes sheen{
-      0%,100%{ transform: translate3d(-2%, -2%, 0) rotate(0deg); opacity:.85; }
-      50%{ transform: translate3d(2%, 2%, 0) rotate(18deg); opacity:.72; }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); opacity:.85; }
+      50%{ transform: scale(1.04); opacity:1; }
     }
     .fish{
-      width: 140px; height: 140px;
-      margin: 6px auto 8px;
+      width: 180px; height: 180px;
       filter:
         drop-shadow(0 24px 24px rgba(0,0,0,.35))
-        drop-shadow(0 0 18px rgba(255,180,0,.22));
+        drop-shadow(0 0 22px rgba(255,180,0,.28));
       transform-origin: 50% 55%;
       animation:
         spin-in 2.2s cubic-bezier(.4,0,.2,1) .12s 1 both,
         bob 2.1s ease-in-out .12s infinite,
         glow 1.7s ease-in-out .12s infinite;
+      z-index: 1;
     }
     @keyframes spin-in{
       0%{ transform: rotate(0deg) scale(.90); opacity:0; }
@@ -92,38 +82,56 @@
     }
     @keyframes glow{
       0%,100%{ filter: drop-shadow(0 24px 24px rgba(0,0,0,.35)) drop-shadow(0 0 18px rgba(255,180,0,.18)); }
-      50%{ filter: drop-shadow(0 24px 24px rgba(0,0,0,.35)) drop-shadow(0 0 28px rgba(255,180,0,.34)); }
+      50%{ filter: drop-shadow(0 24px 24px rgba(0,0,0,.35)) drop-shadow(0 0 30px rgba(255,180,0,.36)); }
     }
-    h1{
-      margin: 10px 0 6px;
-      font-size: clamp(22px, 4.8vw, 34px);
-      font-weight: 950;
-      letter-spacing: .10em;
+    .title{
+      display:grid;
+      gap: 4px;
       text-transform: uppercase;
+      letter-spacing: .14em;
+      font-weight: 950;
+      line-height: 1.08;
+      background: linear-gradient(180deg, var(--gold0), var(--gold1) 55%, var(--gold3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 18px 40px rgba(0,0,0,.45);
       opacity: 0;
       transform: translateY(10px);
       animation: pop 1.05s ease .55s forwards;
+      z-index: 1;
     }
-    p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: pop 1.05s ease .82s forwards;
-    }
+    .title .line1{ font-size: clamp(24px, 5.6vw, 40px); }
+    .title .line2{ font-size: clamp(18px, 4.8vw, 34px); letter-spacing:.12em; }
     @keyframes pop{ to{ opacity:1; transform: translateY(0); } }
+    .progress{
+      height: 6px;
+      width: min(420px, 100%);
+      margin: 12px auto 0;
+      background: rgba(255,255,255,.10);
+      border-radius: 999px;
+      overflow:hidden;
+      z-index: 1;
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(255,234,155,.90), rgba(255,180,0,.92));
+      border-radius: 999px;
+      animation: load 2.8s ease forwards;
+    }
+    @keyframes load{ to{ width: 100%; } }
     .actions{
       display:flex;
       justify-content:center;
       gap: 10px;
       margin-top: 14px;
       flex-wrap:wrap;
+      z-index: 1;
     }
     .pill{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
       color: var(--text);
       padding: 10px 12px;
       border-radius: 999px;
@@ -133,106 +141,96 @@
       cursor:pointer;
       user-select:none;
       transition: transform .15s ease, background .15s ease;
+      box-shadow: var(--shadow);
     }
     .pill:hover{ background: rgba(255,255,255,.11); transform: translateY(-1px); }
     .pill:active{ transform: translateY(0); }
     .pill svg{ width: 18px; height: 18px; }
     .tiny{
-      margin-top: 10px;
+      margin-top: 8px;
       font-size: 12px;
-      color: rgba(255,255,255,.62);
+      color: var(--muted);
       opacity:.95;
-    }
-    .progress{
-      height: 6px;
-      width: min(420px, 100%);
-      margin: 14px auto 0;
-      background: rgba(255,255,255,.10);
-      border-radius: 999px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.12);
-    }
-    .bar{
-      height:100%;
-      width:0%;
-      background: linear-gradient(90deg, rgba(255,234,155,.90), rgba(255,180,0,.92));
-      border-radius: 999px;
-      animation: load 2.8s ease forwards;
-    }
-    @keyframes load{
-      to{ width: 100%; }
+      z-index: 1;
     }
     @media (prefers-reduced-motion: reduce){
-      .fish,.sheen,.bar{ animation: none !important; }
-      h1,p{ opacity:1; transform:none; }
+      .fish,.bar,.halo{ animation: none !important; }
+      .title{ opacity:1; transform:none; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card" role="dialog" aria-modal="true" aria-label="TOSHKENT BALIQCHI splash">
-      <div class="sheen" aria-hidden="true"></div>
+    <div class="halo" aria-hidden="true"></div>
 
-      <!-- Gold fish icon -->
-      <svg class="fish" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" aria-label="Gold fish icon">
-        <defs>
-          <linearGradient id="goldBody" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#ffea9b"/>
-            <stop offset="0.5" stop-color="#ffcf4a"/>
-            <stop offset="1" stop-color="#ffb400"/>
-          </linearGradient>
-          <linearGradient id="goldFin" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0" stop-color="#ffd873"/>
-            <stop offset="1" stop-color="#ff9f00"/>
-          </linearGradient>
-        </defs>
+    <!-- Gold fish icon -->
+    <svg class="fish" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Gold fish icon">
+      <defs>
+        <linearGradient id="goldBody" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffea9b"/>
+          <stop offset="0.45" stop-color="#ffcf4a"/>
+          <stop offset="1" stop-color="#ff8a00"/>
+        </linearGradient>
+        <linearGradient id="goldFin" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#ffd873"/>
+          <stop offset="1" stop-color="#ff9f00"/>
+        </linearGradient>
+        <radialGradient id="goldGlow" cx="50%" cy="45%" r="50%">
+          <stop offset="0" stop-color="#fff2c7" stop-opacity=".9"/>
+          <stop offset=".65" stop-color="#ffcf4a" stop-opacity=".5"/>
+          <stop offset="1" stop-color="#ff8a00" stop-opacity=".1"/>
+        </radialGradient>
+      </defs>
 
-        <!-- tail -->
-        <path d="M26 70c-10-13-12-30-7-48 20 8 36 20 46 38-14 3-23 5-39 10z" fill="url(#goldFin)" opacity=".92"/>
-        <path d="M26 70c-10 13-12 30-7 48 20-8 36-20 46-38-14-3-23-5-39-10z" fill="url(#goldFin)" opacity=".82"/>
+      <circle cx="100" cy="100" r="70" fill="url(#goldGlow)" opacity=".4"/>
 
-        <!-- body -->
-        <ellipse cx="82" cy="70" rx="46" ry="30" fill="url(#goldBody)"/>
-        <ellipse cx="76" cy="70" rx="26" ry="18" fill="rgba(255,255,255,.22)"/>
+      <!-- tail -->
+      <path d="M36 100c-14-18-16-40-10-64 28 10 48 26 62 50-18 4-31 8-52 14z" fill="url(#goldFin)" opacity=".92"/>
+      <path d="M36 100c-14 18-16 40-10 64 28-10 48-26 62-50-18-4-31-8-52-14z" fill="url(#goldFin)" opacity=".82"/>
 
-        <!-- fin -->
-        <path d="M76 48c10 5 20 15 22 22-12-2-21-4-32 3 0-10 4-19 10-25z" fill="url(#goldFin)" opacity=".92"/>
+      <!-- body -->
+      <ellipse cx="118" cy="100" rx="60" ry="38" fill="url(#goldBody)"/>
+      <ellipse cx="108" cy="100" rx="34" ry="22" fill="rgba(255,255,255,.20)"/>
 
-        <!-- eye -->
-        <circle cx="104" cy="62" r="7" fill="rgba(255,255,255,.95)"/>
-        <circle cx="106" cy="62" r="2.8" fill="#07101c"/>
+      <!-- fin -->
+      <path d="M108 74c13 7 26 19 29 28-16-3-28-6-42 4 1-13 6-25 13-32z" fill="url(#goldFin)" opacity=".92"/>
 
-        <!-- mouth -->
-        <path d="M118 74c-5 4-12 4-17 0" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="3.4" stroke-linecap="round"/>
+      <!-- eye -->
+      <circle cx="144" cy="92" r="8" fill="rgba(255,255,255,.95)"/>
+      <circle cx="146" cy="92" r="3.2" fill="#07101c"/>
 
-        <!-- sparkles -->
-        <path d="M110 38l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="rgba(255,234,155,.85)"/>
-        <circle cx="124" cy="52" r="2.6" fill="rgba(255,234,155,.72)"/>
-      </svg>
+      <!-- mouth -->
+      <path d="M164 108c-6 5-16 5-22 0" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="4" stroke-linecap="round"/>
 
-      <h1 id="title">TOSHKENT BALIQCHI</h1>
-      <p id="subtitle">TOSHKENT BALIQCHIGA XUSH KELIBSIZ</p>
+      <!-- sparkles -->
+      <path d="M148 56l3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8z" fill="rgba(255,234,155,.85)"/>
+      <circle cx="168" cy="74" r="3" fill="rgba(255,234,155,.72)"/>
+    </svg>
 
-      <div class="progress" aria-hidden="true"><div class="bar"></div></div>
-      <div class="actions">
-        <div class="pill" id="btnSound" role="button" tabindex="0" aria-label="Voice welcome">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M15 9a4 4 0 0 1 0 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>Ovoz</span>
-        </div>
-        <div class="pill" id="btnSkip" role="button" tabindex="0" aria-label="Skip">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M5 6v12l10-6-10-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M19 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>O‘tkazib yuborish</span>
-        </div>
-      </div>
-
-      <div class="tiny">Авто кириш • Auto enter</div>
+    <div class="title" aria-label="TOSHKENT BALIQCHI GA XUSH KELIBSIZ">
+      <div class="line1">TOSHKENT BALIQCHI GA</div>
+      <div class="line2">XUSH KELIBSIZ</div>
     </div>
+
+    <div class="progress" aria-hidden="true"><div class="bar"></div></div>
+    <div class="actions">
+      <div class="pill" id="btnSound" role="button" tabindex="0" aria-label="Voice welcome">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15 9a4 4 0 0 1 0 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>Ovoz</span>
+      </div>
+      <div class="pill" id="btnSkip" role="button" tabindex="0" aria-label="Skip">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 6v12l10-6-10-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M19 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>O'tkazib yuborish</span>
+      </div>
+    </div>
+
+    <div class="tiny">Avto kirish • Auto enter</div>
   </div>
 
   <script>
@@ -251,7 +249,7 @@
 
     function speakWelcome() {
       const lang = localStorage.getItem("tb_lang") || "uz";
-      const uzText = "Assalomu alaykum! Toshkent Baliqchiga xush kelibsiz. Buyurtma uchun qo‘ng‘iroq qiling yoki Telegramga yozing.";
+      const uzText = "Assalomu alaykum! Toshkent Baliqchiga xush kelibsiz. Buyurtma uchun qo'ng'iroq qiling yoki Telegramga yozing.";
       const ruText = "Здравствуйте! Добро пожаловать в Toshkent Baliqchi. Для заказа позвоните или напишите в Telegram.";
       const text = lang === "ru" ? ruText : uzText;
 
@@ -273,7 +271,7 @@
           const voices = window.speechSynthesis.getVoices?.() || [];
           const prefer = lang === "ru"
             ? ["ru-ru", "ru"]
-            : ["uz-uz", "uz", "tr-tr", "tr"]; // Uzbek often missing; Turkish is a decent fallback
+            : ["uz-uz", "uz", "tr-tr", "tr"];
           const v = voices.find(vx => prefer.some(p => (vx.lang || "").toLowerCase().includes(p)));
           if (v) u.voice = v;
 
@@ -283,7 +281,6 @@
     }
 
     function goNext() {
-      // Keep a flag if you want to prevent showing splash repeatedly later
       sessionStorage.setItem("tb_splash_done", "1");
       window.location.replace(REDIRECT_TO);
     }
@@ -296,7 +293,6 @@
     $("#btnSound").addEventListener("click", speakWelcome);
     $("#btnSound").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); speakWelcome(); } });
 
-    // Ensure voices are loaded in some browsers
     if ("speechSynthesis" in window) window.speechSynthesis.onvoiceschanged = () => {};
   </script>
 </body>
