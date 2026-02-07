@@ -16,7 +16,6 @@
       --gold3:#ff8a00;
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
-      --shadow: 0 28px 120px rgba(0,0,0,.6);
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -37,7 +36,7 @@
       align-items:center;
       justify-content:center;
       flex-direction:column;
-      gap: 10px;
+      gap: 12px;
       padding: 22px;
       position:relative;
       text-align:center;
@@ -54,39 +53,26 @@
       animation: pulse 3.2s ease-in-out infinite;
       pointer-events:none;
     }
+    .shine{
+      position:absolute;
+      inset:-40% -20%;
+      background: conic-gradient(from 220deg, rgba(255,180,0,0), rgba(255,180,0,.20), rgba(255,223,122,.16), rgba(58,160,255,.10), rgba(255,180,0,0));
+      filter: blur(18px);
+      animation: sweep 4.2s ease-in-out infinite;
+      opacity:.75;
+      pointer-events:none;
+    }
     @keyframes pulse{
       0%,100%{ transform: scale(1); opacity:.85; }
       50%{ transform: scale(1.04); opacity:1; }
     }
-    .fish{
-      width: 180px; height: 180px;
-      filter:
-        drop-shadow(0 24px 24px rgba(0,0,0,.35))
-        drop-shadow(0 0 22px rgba(255,180,0,.28));
-      transform-origin: 50% 55%;
-      animation:
-        spin-in 2.2s cubic-bezier(.4,0,.2,1) .12s 1 both,
-        bob 2.1s ease-in-out .12s infinite,
-        glow 1.7s ease-in-out .12s infinite;
-      z-index: 1;
-    }
-    @keyframes spin-in{
-      0%{ transform: rotate(0deg) scale(.90); opacity:0; }
-      18%{ opacity:1; }
-      74%{ transform: rotate(720deg) scale(1); }
-      100%{ transform: rotate(760deg) scale(1); }
-    }
-    @keyframes bob{
-      0%,100%{ translate: 0 0; }
-      50%{ translate: 0 -7px; }
-    }
-    @keyframes glow{
-      0%,100%{ filter: drop-shadow(0 24px 24px rgba(0,0,0,.35)) drop-shadow(0 0 18px rgba(255,180,0,.18)); }
-      50%{ filter: drop-shadow(0 24px 24px rgba(0,0,0,.35)) drop-shadow(0 0 30px rgba(255,180,0,.36)); }
+    @keyframes sweep{
+      0%,100%{ transform: translate3d(-2%, -2%, 0) rotate(0deg); }
+      50%{ transform: translate3d(2%, 2%, 0) rotate(18deg); }
     }
     .title{
       display:grid;
-      gap: 4px;
+      gap: 6px;
       text-transform: uppercase;
       letter-spacing: .14em;
       font-weight: 950;
@@ -107,7 +93,7 @@
     .progress{
       height: 6px;
       width: min(420px, 100%);
-      margin: 12px auto 0;
+      margin: 10px auto 0;
       background: rgba(255,255,255,.10);
       border-radius: 999px;
       overflow:hidden;
@@ -118,34 +104,9 @@
       width:0%;
       background: linear-gradient(90deg, rgba(255,234,155,.90), rgba(255,180,0,.92));
       border-radius: 999px;
-      animation: load 2.8s ease forwards;
+      animation: load 2.6s ease forwards;
     }
     @keyframes load{ to{ width: 100%; } }
-    .actions{
-      display:flex;
-      justify-content:center;
-      gap: 10px;
-      margin-top: 14px;
-      flex-wrap:wrap;
-      z-index: 1;
-    }
-    .pill{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 999px;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .15s ease, background .15s ease;
-      box-shadow: var(--shadow);
-    }
-    .pill:hover{ background: rgba(255,255,255,.11); transform: translateY(-1px); }
-    .pill:active{ transform: translateY(0); }
-    .pill svg{ width: 18px; height: 18px; }
     .tiny{
       margin-top: 8px;
       font-size: 12px;
@@ -154,7 +115,7 @@
       z-index: 1;
     }
     @media (prefers-reduced-motion: reduce){
-      .fish,.bar,.halo{ animation: none !important; }
+      .bar,.halo,.shine{ animation: none !important; }
       .title{ opacity:1; transform:none; }
     }
   </style>
@@ -162,50 +123,7 @@
 <body>
   <div class="wrap">
     <div class="halo" aria-hidden="true"></div>
-
-    <!-- Gold fish icon -->
-    <svg class="fish" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Gold fish icon">
-      <defs>
-        <linearGradient id="goldBody" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#ffea9b"/>
-          <stop offset="0.45" stop-color="#ffcf4a"/>
-          <stop offset="1" stop-color="#ff8a00"/>
-        </linearGradient>
-        <linearGradient id="goldFin" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stop-color="#ffd873"/>
-          <stop offset="1" stop-color="#ff9f00"/>
-        </linearGradient>
-        <radialGradient id="goldGlow" cx="50%" cy="45%" r="50%">
-          <stop offset="0" stop-color="#fff2c7" stop-opacity=".9"/>
-          <stop offset=".65" stop-color="#ffcf4a" stop-opacity=".5"/>
-          <stop offset="1" stop-color="#ff8a00" stop-opacity=".1"/>
-        </radialGradient>
-      </defs>
-
-      <circle cx="100" cy="100" r="70" fill="url(#goldGlow)" opacity=".4"/>
-
-      <!-- tail -->
-      <path d="M36 100c-14-18-16-40-10-64 28 10 48 26 62 50-18 4-31 8-52 14z" fill="url(#goldFin)" opacity=".92"/>
-      <path d="M36 100c-14 18-16 40-10 64 28-10 48-26 62-50-18-4-31-8-52-14z" fill="url(#goldFin)" opacity=".82"/>
-
-      <!-- body -->
-      <ellipse cx="118" cy="100" rx="60" ry="38" fill="url(#goldBody)"/>
-      <ellipse cx="108" cy="100" rx="34" ry="22" fill="rgba(255,255,255,.20)"/>
-
-      <!-- fin -->
-      <path d="M108 74c13 7 26 19 29 28-16-3-28-6-42 4 1-13 6-25 13-32z" fill="url(#goldFin)" opacity=".92"/>
-
-      <!-- eye -->
-      <circle cx="144" cy="92" r="8" fill="rgba(255,255,255,.95)"/>
-      <circle cx="146" cy="92" r="3.2" fill="#07101c"/>
-
-      <!-- mouth -->
-      <path d="M164 108c-6 5-16 5-22 0" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="4" stroke-linecap="round"/>
-
-      <!-- sparkles -->
-      <path d="M148 56l3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8z" fill="rgba(255,234,155,.85)"/>
-      <circle cx="168" cy="74" r="3" fill="rgba(255,234,155,.72)"/>
-    </svg>
+    <div class="shine" aria-hidden="true"></div>
 
     <div class="title" aria-label="TOSHKENT BALIQCHI GA XUSH KELIBSIZ">
       <div class="line1">TOSHKENT BALIQCHI GA</div>
@@ -213,87 +131,17 @@
     </div>
 
     <div class="progress" aria-hidden="true"><div class="bar"></div></div>
-    <div class="actions">
-      <div class="pill" id="btnSound" role="button" tabindex="0" aria-label="Voice welcome">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M15 9a4 4 0 0 1 0 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>Ovoz</span>
-      </div>
-      <div class="pill" id="btnSkip" role="button" tabindex="0" aria-label="Skip">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5 6v12l10-6-10-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M19 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>O'tkazib yuborish</span>
-      </div>
-    </div>
-
-    <div class="tiny">Avto kirish • Auto enter</div>
+    <div class="tiny">Avto kirish ? Auto enter</div>
   </div>
 
   <script>
-    /**
-     * Splash behavior:
-     * - Dark-only entrance page
-     * - Gold fish animation
-     * - Optional voice (audio file preferred; fallback to speechSynthesis)
-     * - Auto redirect to index.html
-     */
-
     const REDIRECT_TO = "index.html";
-    const DURATION_MS = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ? 900 : 3000;
+    const DURATION_MS = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ? 900 : 2600;
 
-    const $ = (s, r = document) => r.querySelector(s);
-
-    function speakWelcome() {
-      const lang = localStorage.getItem("tb_lang") || "uz";
-      const uzText = "Assalomu alaykum! Toshkent Baliqchiga xush kelibsiz. Buyurtma uchun qo'ng'iroq qiling yoki Telegramga yozing.";
-      const ruText = "Здравствуйте! Добро пожаловать в Toshkent Baliqchi. Для заказа позвоните или напишите в Telegram.";
-      const text = lang === "ru" ? ruText : uzText;
-
-      // Prefer real recorded audio if you add files:
-      //   /assets/voice/uz.mp3
-      //   /assets/voice/ru.mp3
-      const audioSrc = lang === "ru" ? "assets/voice/ru.mp3" : "assets/voice/uz.mp3";
-      const audio = new Audio(audioSrc);
-      audio.volume = 1;
-
-      audio.play().catch(() => {
-        if (!("speechSynthesis" in window)) return;
-        try {
-          window.speechSynthesis.cancel();
-          const u = new SpeechSynthesisUtterance(text);
-          u.rate = 1;
-          u.pitch = 1;
-
-          const voices = window.speechSynthesis.getVoices?.() || [];
-          const prefer = lang === "ru"
-            ? ["ru-ru", "ru"]
-            : ["uz-uz", "uz", "tr-tr", "tr"];
-          const v = voices.find(vx => prefer.some(p => (vx.lang || "").toLowerCase().includes(p)));
-          if (v) u.voice = v;
-
-          window.speechSynthesis.speak(u);
-        } catch (_) {}
-      });
-    }
-
-    function goNext() {
+    setTimeout(() => {
       sessionStorage.setItem("tb_splash_done", "1");
       window.location.replace(REDIRECT_TO);
-    }
-
-    const timer = setTimeout(goNext, DURATION_MS);
-
-    $("#btnSkip").addEventListener("click", () => { clearTimeout(timer); goNext(); });
-    $("#btnSkip").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); clearTimeout(timer); goNext(); } });
-
-    $("#btnSound").addEventListener("click", speakWelcome);
-    $("#btnSound").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); speakWelcome(); } });
-
-    if ("speechSynthesis" in window) window.speechSynthesis.onvoiceschanged = () => {};
+    }, DURATION_MS);
   </script>
 </body>
 </html>

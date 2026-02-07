@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html lang="uz" data-theme="dark">
 <head>
@@ -8,11 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#070b13" />
   <title>TOSHKENT BALIQCHI</title>
-  <link rel="stylesheet" href="./splash.html">
-  <meta name="description" content="TOSHKENT BALIQCHI — Sazan va Oq baliq. Chilonzor 9-kvartal. Tez buyurtma, mazali servis." />
+  <meta name="description" content="TOSHKENT BALIQCHI - Baliq va Mazzali ovqatlar.Tez buyurtma, mazali servis." />
 
   <style>
-    :root{
+:root{
       --bg: #070b13;
       --surface: rgba(255,255,255,.06);
       --surface-2: rgba(255,255,255,.10);
@@ -51,6 +47,7 @@
     }
 
     *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
     body{
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
@@ -317,6 +314,7 @@
       box-shadow: 0 18px 40px rgba(255,180,0,.10);
     }
     .btn.primary:hover{ filter: brightness(1.03); }
+    .btn.primary .ico{ color: #1a1200; filter: none; }
 
     /* ===== Section head ===== */
     .section-head{
@@ -347,8 +345,10 @@
       padding: 14px;
       display:flex;
       gap: 12px;
-      align-items:flex-start;
+      align-items:stretch;
+      min-height: 112px;
     }
+    .feature > div{ display:grid; align-content:center; }
     .feature strong{ display:block; font-size: 14px; }
     .feature span{ display:block; font-size: 12px; color: var(--muted); line-height:1.45; margin-top:2px; }
     .feature-ico{
@@ -364,56 +364,135 @@
     .grid{ display:grid; gap: var(--grid-gap); }
     .menu-grid{ grid-template-columns: 1fr; }
 
-    .menu-card{ display:grid; grid-template-columns: 1fr; }
-    .menu-media{ position:relative; height: 230px; overflow:hidden; }
+    .menu-split{ display:grid; gap: 16px; }
+    .menu-block{
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .menu-block-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 14px 10px;
+      gap: 10px;
+    }
+    .menu-block-head h3{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .menu-block-head p{
+      margin:0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .menu-block.fish{
+      background:
+        radial-gradient(820px 420px at 20% 10%, rgba(255,180,0,.12), transparent 60%),
+        radial-gradient(760px 420px at 85% 20%, rgba(46,230,166,.12), transparent 60%),
+        var(--surface);
+      border-color: rgba(255,180,0,.35);
+    }
+
+    .menu-card{
+      display:grid;
+      grid-template-columns: 1fr;
+      overflow:hidden;
+      position:relative;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    html[data-theme="light"] .menu-card{ box-shadow: 0 12px 40px rgba(10,15,30,.10); }
+    .menu-card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.28);
+      border-color: rgba(255,255,255,.20);
+    }
+    .menu-media{ position:relative; height: 210px; overflow:hidden; }
     .menu-media img{
       width:100%; height:100%;
       object-fit:cover;
-      transform: scale(1.06);
+      transform: scale(1.04);
       transition: transform .4s ease;
-      filter: saturate(1.12) contrast(1.06);
+      filter: saturate(1.08) contrast(1.05);
     }
-    .menu-card:hover .menu-media img{ transform: scale(1.12); }
+    .menu-card:hover .menu-media img{ transform: scale(1.10); }
     .menu-media::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.62));
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.65));
     }
+    .menu-badge{
+      position:absolute; left: 12px; top: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.45);
+      font-size: 11px;
+      color: #fff;
+      letter-spacing:.04em;
+      text-transform: uppercase;
+      backdrop-filter: var(--glass);
+    }
+    html[data-theme="light"] .menu-badge{ background: rgba(255,255,255,.75); color:#111; }
 
     .menu-body{ padding: 14px; display:grid; gap: 10px; }
-    .menu-top{ display:flex; align-items:start; justify-content:space-between; gap: 10px; }
-    .menu-name{ margin:0; font-weight: 950; font-size: 18px; letter-spacing:.01em; }
-    .tag{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.08);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
+    .menu-title{
+      margin:0;
+      font-weight: 950;
+      font-size: 18px;
+      letter-spacing:.01em;
+    }
+    .menu-sub{
+      margin:0;
       color: var(--muted);
-      white-space: nowrap;
-    }
-    html[data-theme="light"] .tag{ background: rgba(10,15,30,.06); }
-
-    .menu-desc{
-      margin: 0;
-      color: rgba(255,255,255,.78);
       font-size: 12px;
-      line-height: 1.5;
     }
-    html[data-theme="light"] .menu-desc{ color: rgba(10,15,30,.70); }
-
-    .price-list{ display:grid; gap: 10px; }
-    .price-row{
-      display:flex; justify-content:space-between; align-items:center;
-      padding: 10px 12px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--btn);
+    .menu-price{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255,223,122,.95), rgba(255,180,0,.92));
+      color: #1a1200;
+      font-weight: 900;
+      width: fit-content;
+      box-shadow: 0 10px 24px rgba(255,180,0,.16);
     }
-    .price-row b{ font-size: 13px; }
-    .price-row span{ color: var(--muted); font-size: 12px; }
-
+    .menu-price small{ font-size: 12px; font-weight: 700; opacity:.8; }
     .menu-actions{ display:flex; flex-wrap:wrap; gap: 10px; }
+    .menu-actions .btn{
+      padding: 10px 12px;
+      border-radius: 14px;
+    }
+    .menu-actions .btn .ico{ color: #0b0f17; filter: none; }
+
+    .menu-card.food .menu-price{
+      background: linear-gradient(135deg, rgba(58,160,255,.95), rgba(46,230,166,.92));
+      color: #041018;
+      box-shadow: 0 10px 24px rgba(58,160,255,.18);
+    }
+    .menu-card.food .menu-badge{
+      background: rgba(8,20,30,.55);
+    }
+
+    .menu-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .menu-nav .btn{
+      padding: 10px 12px;
+      border-radius: 999px;
+    }
 
     /* ===== Gallery ===== */
     .gallery{
@@ -421,29 +500,45 @@
     }
     .gallery .shot{
       position:relative;
-      height: 210px;
+      height: 230px;
       overflow:hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: 0 16px 40px rgba(0,0,0,.22);
     }
+    html[data-theme="light"] .gallery .shot{ box-shadow: 0 16px 40px rgba(10,15,30,.10); }
     .gallery img{
       width:100%; height:100%;
       object-fit:cover;
-      transform: scale(1.04);
+      transform: scale(1.03);
       transition: transform .35s ease;
-      filter: saturate(1.10) contrast(1.04);
+      filter: saturate(1.12) contrast(1.05);
+    }
+    .gallery video{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
     }
     .shot:hover img{ transform: scale(1.10); }
     .shot::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.60));
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.70));
     }
     .shot .cap{
       position:absolute;
       left: 12px; right: 12px; bottom: 12px;
       font-size: 12px;
-      color: rgba(255,255,255,.90);
+      color: rgba(255,255,255,.92);
       display:flex; align-items:center; gap: 8px;
       letter-spacing:.02em;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: var(--glass);
+      width: fit-content;
     }
 
     /* ===== Contact & Map ===== */
@@ -513,8 +608,13 @@
       .gallery{ grid-template-columns: repeat(2, 1fr); }
       .contact-grid{ grid-template-columns: repeat(2, 1fr); }
       .footer-inner{ grid-template-columns: 1fr auto; text-align:left; }
-      .menu-media{ height: 250px; }
+      .menu-media{ height: 230px; }
       .gallery .shot{ height: 240px; }
+    }
+
+    @media (min-width: 1024px){
+      .menu-grid{ grid-template-columns: repeat(3, 1fr); }
+      .menu-media{ height: 220px; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -526,8 +626,7 @@
 </head>
 
 <body>
-  <!-- SVG Sprite (gold fish icons) -->
-  <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px" aria-hidden="true">
     <symbol id="i-fish" viewBox="0 0 24 24">
       <path d="M4 12c2-5 7-7 11-6 2 .5 4 2 5 4-2 6-8 8-13 7-1.5-.2-3-1-3-5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
       <circle cx="17" cy="11" r="1.5" fill="currentColor"/>
@@ -567,7 +666,7 @@
   </svg>
 
   <!-- HEADER -->
-  <header class="topbar">
+<header class="topbar">
     <div class="container">
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="Home">
@@ -607,7 +706,7 @@
     <div class="card">
       <h3 data-i18n="navTitle">Menyu</h3>
       <div class="navlinks">
-        <a href="#menu" class="navlink">
+        <a href="menu.html#menu" class="navlink">
           <svg class="ico"><use href="#i-fish"></use></svg>
           <span data-i18n="navMenu">Baliqlar / Narxlar</span>
         </a>
@@ -633,7 +732,7 @@
           <svg class="ico"><use href="#i-phone"></use></svg>
           <span data-i18n="callNow">Qo‘ng‘iroq</span>
         </a>
-        <a id="sideTg" href="https://t.me/toshkent_baliq" target="_blank" rel="noreferrer">
+        <a id="sideTg" href="https://t.me/+998909417600" target="_blank" rel="noreferrer">
           <svg class="ico"><use href="#i-telegram"></use></svg>
           <span>Telegram</span>
         </a>
@@ -660,7 +759,7 @@
   <main id="top">
     <div class="container">
       <!-- HERO -->
-      <section class="hero reveal">
+<section class="hero reveal">
         <div class="hero-card">
           <div class="hero-media" aria-hidden="true">
             <!-- Keep your video or replace later -->
@@ -681,7 +780,7 @@
             </h1>
 
             <p class="hero-sub" data-i18n="heroSub">
-              Chilonzor 9-kvartalda: Sazan va Oq baliq — qovurilgan, grilda yoki tandir uslubida. Toza yog‘, issiq servis, tez buyurtma.
+              Toshkent Chilonzor 8-kvartalda, Malika gostinitsa yonida: Sazan va Oq baliq — qovurilgan, grilda yoki tandir uslubida. Toza yog‘, issiq servis, tez buyurtma.
             </p>
 
             <div class="hero-cta">
@@ -690,12 +789,12 @@
                 <span data-i18n="orderNow">Hozir buyurtma qiling</span>
               </a>
 
-              <a class="btn" href="#menu">
+              <a class="btn" href="menu.html#menu">
                 <svg class="ico big"><use href="#i-fish"></use></svg>
                 <span data-i18n="seeMenu">Menyuni ko‘rish</span>
               </a>
 
-              <a class="btn" href="https://t.me/toshkent_baliq" target="_blank" rel="noreferrer">
+              <a class="btn" href="https://t.me/+998909417600" target="_blank" rel="noreferrer">
                 <svg class="ico big"><use href="#i-telegram"></use></svg>
                 <span data-i18n="writeTelegram">Telegramga yozish</span>
               </a>
@@ -704,145 +803,8 @@
         </div>
       </section>
 
-      <!-- FEATURES -->
-      <section id="about" class="reveal">
-        <div class="section-head">
-          <div>
-            <h2 data-i18n="aboutTitle">Baliqxona</h2>
-            <p data-i18n="aboutHint">Sifat • Tozalik • Tezlik</p>
-          </div>
-          <p data-i18n="workHours">Ish vaqti: 10:00–23:00</p>
-        </div>
-
-        <div class="grid feature-grid">
-          <div class="card feature">
-            <div class="feature-ico" aria-hidden="true"><svg class="ico big"><use href="#i-fish"></use></svg></div>
-            <div>
-              <strong data-i18n="f1Title">Yangi mahsulot</strong>
-              <span data-i18n="f1Desc">Har kuni saralangan sazan va oq baliq. Tayyorlashdan oldin tozalash va nazorat.</span>
-            </div>
-          </div>
-
-          <div class="card feature">
-            <div class="feature-ico" aria-hidden="true"><svg class="ico big"><use href="#i-fish"></use></svg></div>
-            <div>
-              <strong data-i18n="f2Title">Mazali uslub</strong>
-              <span data-i18n="f2Desc">Qovurilgan / grilda / tandir — ta’m muvozanati va a’loqishiq qarsildoq.</span>
-            </div>
-          </div>
-
-          <div class="card feature">
-            <div class="feature-ico" aria-hidden="true"><svg class="ico big"><use href="#i-phone"></use></svg></div>
-            <div>
-              <strong data-i18n="f3Title">Tez buyurtma</strong>
-              <span data-i18n="f3Desc">Qo‘ng‘iroq yoki Telegram: buyurtmani tez qabul qilamiz, maslahat beramiz.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- MENU -->
-      <section id="menu" class="reveal">
-        <div class="section-head">
-          <div>
-            <h2 data-i18n="menuTitle">Menyu</h2>
-            <p data-i18n="menuHint">Sazan • Oq baliq • kg / gram</p>
-          </div>
-          <p data-i18n="menuNote">Narxlar namunaviy (istalgancha o‘zgartirasiz).</p>
-        </div>
-
-        <div class="grid menu-grid">
-          <!-- Sazan (cooked) -->
-          <article class="card menu-card">
-            <div class="menu-media">
-              <!-- “real cooked” style image (replace with your real photos anytime) -->
-              <img src="./images/image.png" alt="Qovurilgan sazan (karp) — cooked" />
-            </div>
-            <div class="menu-body">
-              <div class="menu-top">
-                <h3 class="menu-name" data-i18n="fish1Name">Sazan (Karp)</h3>
-                <span class="tag" data-i18n="fishHot">Issiq</span>
-              </div>
-
-              <p class="menu-desc" data-i18n="fish1Desc">
-                Qovurilgan / grilda. Limon, piyoz, ko‘katlar bilan. Ichidan yumshoq, usti qarsildoq.
-              </p>
-
-              <div class="price-list" aria-label="Price list">
-                <div class="price-row">
-                  <b data-i18n="kg1">1 kg</b>
-                  <span data-i18n="fish1KgPrice">200 000 so‘m</span>
-                </div>
-                <div class="price-row">
-                  <b data-i18n="g500">500 gr</b>
-                  <span data-i18n="fish1HalfPrice">100 000 so‘m</span>
-                </div>
-                <div class="price-row">
-                  <b data-i18n="g300">300 gr</b>
-                  <span data-i18n="fish1SmallPrice">65 000 so‘m</span>
-                </div>
-              </div>
-
-              <div class="menu-actions">
-                <a class="btn primary" href="tel:+998909417600">
-                  <svg class="ico"><use href="#i-phone"></use></svg>
-                  <span data-i18n="orderThis">Shuni buyurtma</span>
-                </a>
-                <a class="btn" href="https://t.me/toshkent_baliq" target="_blank" rel="noreferrer">
-                  <svg class="ico"><use href="#i-telegram"></use></svg>
-                  <span data-i18n="askTelegram">Telegramda so‘rash</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Oq baliq (white fish) cooked -->
-          <article class="card menu-card">
-            <div class="menu-media">
-              <img src="./images/image copy.png" alt="Oq baliq (white fish) — cooked" />
-            </div>
-            <div class="menu-body">
-              <div class="menu-top">
-                <h3 class="menu-name" data-i18n="fish2Name">Oq baliq</h3>
-                <span class="tag" data-i18n="fishChef">Tavsiya</span>
-              </div>
-
-              <p class="menu-desc" data-i18n="fish2Desc">
-                Tandir / grilda. Yengil, aromatli, mazasi sof. Bolalar uchun ham zo‘r.
-              </p>
-
-              <div class="price-list" aria-label="Price list">
-                <div class="price-row">
-                  <b data-i18n="kg1">1 kg</b>
-                  <span data-i18n="fish2KgPrice">225 000 so‘m</span>
-                </div>
-                <div class="price-row">
-                  <b data-i18n="g500">500 gr</b>
-                  <span data-i18n="fish2HalfPrice">112 500 so‘m</span>
-                </div>
-                <div class="price-row">
-                  <b data-i18n="g300">300 gr</b>
-                  <span data-i18n="fish2SmallPrice">65 000 so‘m</span>
-                </div>
-              </div>
-
-              <div class="menu-actions">
-                <a class="btn primary" href="tel:+998909417600">
-                  <svg class="ico"><use href="#i-phone"></use></svg>
-                  <span data-i18n="orderThis">Shuni buyurtma</span>
-                </a>
-                <a class="btn" href="https://t.me/toshkent_baliq" target="_blank" rel="noreferrer">
-                  <svg class="ico"><use href="#i-telegram"></use></svg>
-                  <span data-i18n="askTelegram">Telegramda so‘rash</span>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
       <!-- GALLERY -->
-      <section id="gallery" class="reveal">
+<section id="gallery" class="reveal">
         <div class="section-head">
           <div>
             <h2 data-i18n="galleryTitle">Galereya</h2>
@@ -852,6 +814,14 @@
         </div>
 
         <div class="grid gallery">
+          <div class="card shot">
+            <img src="./images/Change1.png" alt="Change 1" />
+            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Yangi rasm</span></div>
+          </div>
+          <div class="card shot">
+            <img src="./images/Change2.png" alt="Change 2" />
+            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Yangi rasm</span></div>
+          </div>
           <div class="card shot">
             <img src="./images/image 02.png" alt="Cooked fish plate" />
             <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span data-i18n="g1">Issiq taom</span></div>
@@ -868,11 +838,37 @@
             <img src="./images/image4.png" alt="Restaurant ambiance" />
             <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span data-i18n="g4">Yoqimli muhit</span></div>
           </div>
+
+          
+          <div class="card shot">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="./Videos/video2.mp4" type="video/mp4" />
+            </video>
+            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
+          </div>
+          <div class="card shot">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="./Videos/video3.mp4" type="video/mp4" />
+            </video>
+            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
+          </div>
+          <div class="card shot">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="./Videos/video4.mp4" type="video/mp4" />
+            </video>
+            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
+          </div>
+          <div class="card shot">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="./Videos/video5.mp4" type="video/mp4" />
+            </video>
+            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
+          </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section id="contact" class="reveal">
+<section id="contact" class="reveal">
         <div class="section-head">
           <div>
             <h2 data-i18n="contactTitle">Aloqa</h2>
@@ -898,8 +894,8 @@
             <div class="contact-ico" aria-hidden="true"><svg class="ico big"><use href="#i-telegram"></use></svg></div>
             <div class="contact-text">
               <strong>Telegram</strong>
-              <span>@toshkent_baliq</span>
-              <a class="contact-link" href="https://t.me/toshkent_baliq" target="_blank" rel="noreferrer">
+              <span>+998 90 941 76 00</span>
+              <a class="contact-link" href="https://t.me/+998909417600" target="_blank" rel="noreferrer">
                 <svg class="ico"><use href="#i-arrow"></use></svg>
                 <span data-i18n="writeTap">Yozish</span>
               </a>
@@ -912,8 +908,8 @@
             </div>
             <div class="contact-text">
               <strong>Instagram</strong>
-              <span data-i18n="igNote">Linkni keyin update qilasiz</span>
-              <a class="contact-link" href="https://instagram.com/" target="_blank" rel="noreferrer" id="instagramLink">
+              <span>@toshkent_baliqchi</span>
+              <a class="contact-link" href="https://instagram.com/toshkent_baliqchi" target="_blank" rel="noreferrer" id="instagramLink">
                 <svg class="ico"><use href="#i-arrow"></use></svg>
                 <span data-i18n="openTap">Ochish</span>
               </a>
@@ -924,7 +920,7 @@
             <div class="contact-ico" aria-hidden="true"><svg class="ico big"><use href="#i-pin"></use></svg></div>
             <div class="contact-text">
               <strong data-i18n="addressTitle">Manzil</strong>
-              <span data-i18n="addressLine">Chilonzor 9-kvartal, Toshkent</span>
+              <span data-i18n="addressLine">Toshkent Chilonzor 8-kvartal, Malika gostinitsa yonida</span>
               <a class="contact-link" href="#map">
                 <svg class="ico"><use href="#i-arrow"></use></svg>
                 <span data-i18n="seeMap">Xaritada ko‘rish</span>
@@ -935,11 +931,11 @@
       </section>
 
       <!-- MAP -->
-      <section id="map" class="reveal">
+<section id="map" class="reveal">
         <div class="section-head">
           <div>
             <h2 data-i18n="mapTitle">Lokatsiya</h2>
-            <p data-i18n="mapHint">Chilonzor 9-kvartal (yaqin atrof)</p>
+            <p data-i18n="mapHint">Chilonzor 8-kvartal (Malika gostinitsa yonida)</p>
           </div>
           <p data-i18n="mapNote">Aniq pin linkini qo‘ysangiz yanada zo‘r.</p>
         </div>
@@ -948,16 +944,17 @@
           <iframe
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Chilonzor%209-kvartal%20Toshkent&output=embed"
+            src="https://www.google.com/maps?q=Chilonzor%208-kvartal%20Toshkent%20Malika%20gostinitsa&output=embed"
             title="TOSHKENT BALIQCHI location">
           </iframe>
         </div>
       </section>
     </div>
+    </div>
   </main>
 
   <!-- FOOTER -->
-  <footer>
+<footer>
     <div class="container">
       <div class="footer-inner">
         <div>
@@ -966,7 +963,7 @@
             <span data-i18n="footerLine">Mazali baliq, tez buyurtma, yoqimli servis.</span>
           </div>
           <div class="tiny" style="margin-top:6px;">
-            <span data-i18n="footerAddr">Chilonzor 9-kvartal, Toshkent</span> •
+            <span data-i18n="footerAddr">Toshkent Chilonzor 8-kvartal, Malika gostinitsa yonida</span> •
             <a href="tel:+998909417600" style="color: var(--gold-2); font-weight: 950;">+998 90 941 76 00</a>
           </div>
         </div>
@@ -978,7 +975,7 @@
   </footer>
 
   <script>
-    /**
+/**
      * Upgrades:
      * - Separate splash page (splash.html) redirects here.
      * - Gold fish icons everywhere.
@@ -1012,7 +1009,7 @@
 
         kicker: "Yangi • Issiq • Mazali",
         heroTitle: "TOSHKENT BALIQCHI — chinakam ta’m",
-        heroSub: "Chilonzor 9-kvartalda: Sazan va Oq baliq — qovurilgan, grilda yoki tandir uslubida. Toza yog‘, issiq servis, tez buyurtma.",
+        heroSub: "Toshkent Chilonzor 8-kvartalda, Malika gostinitsa yonida: Sazan va Oq baliq — qovurilgan, grilda yoki tandir uslubida. Toza yog‘, issiq servis, tez buyurtma.",
         orderNow: "Hozir buyurtma qiling",
         seeMenu: "Menyuni ko‘rish",
         writeTelegram: "Telegramga yozish",
@@ -1070,15 +1067,15 @@
         igNote: "Linkni keyin update qilasiz",
         openTap: "Ochish",
         addressTitle: "Manzil",
-        addressLine: "Chilonzor 9-kvartal, Toshkent",
+        addressLine: "Toshkent Chilonzor 8-kvartal, Malika gostinitsa yonida",
         seeMap: "Xaritada ko‘rish",
 
         mapTitle: "Lokatsiya",
-        mapHint: "Chilonzor 9-kvartal (yaqin atrof)",
+        mapHint: "Chilonzor 8-kvartal (Malika gostinitsa yonida)",
         mapNote: "Aniq pin linkini qo‘ysangiz yanada zo‘r.",
 
         footerLine: "Mazali baliq, tez buyurtma, yoqimli servis.",
-        footerAddr: "Chilonzor 9-kvartal, Toshkent",
+        footerAddr: "Toshkent Chilonzor 8-kvartal, Malika gostinitsa yonida",
 
         voiceText: "Assalomu alaykum! Toshkent Baliqchi saytiga xush kelibsiz. Buyurtma uchun qo‘ng‘iroq qiling yoki Telegramga yozing."
       },
@@ -1100,7 +1097,7 @@
 
         kicker: "Свежо • Горячо • Вкусно",
         heroTitle: "TOSHKENT BALIQCHI — настоящий вкус",
-        heroSub: "Чиланзар 9-квартал: сазан и белая рыба — жареная, на гриле или в тандыре. Чистое масло, горячий сервис, быстрый заказ.",
+        heroSub: "Ташкент, Чиланзар 8-квартал, возле гостиницы «Малика»: сазан и белая рыба — жареная, на гриле или в тандыре. Чистое масло, горячий сервис, быстрый заказ.",
         orderNow: "Заказать сейчас",
         seeMenu: "Смотреть меню",
         writeTelegram: "Написать в Telegram",
@@ -1158,15 +1155,15 @@
         igNote: "Ссылку обновите позже",
         openTap: "Открыть",
         addressTitle: "Адрес",
-        addressLine: "Чиланзар 9-квартал, Ташкент",
+        addressLine: "Ташкент, Чиланзар 8-квартал, возле гостиницы «Малика»",
         seeMap: "Смотреть на карте",
 
         mapTitle: "Локация",
-        mapHint: "Чиланзар 9-квартал (рядом)",
+        mapHint: "Чиланзар 8-квартал (возле гостиницы «Малика»)",
         mapNote: "Добавьте точный pin — будет ещё лучше.",
 
         footerLine: "Вкусная рыба, быстрый заказ, отличный сервис.",
-        footerAddr: "Чиланзар 9-квартал, Ташкент",
+        footerAddr: "Ташкент, Чиланзар 8-квартал, возле гостиницы «Малика»",
 
         voiceText: "Здравствуйте! Добро пожаловать на сайт Toshkent Baliqchi. Для заказа позвоните или напишите в Telegram."
       }
@@ -1227,6 +1224,7 @@
 
     function setupSmoothScroll() {
       $$(".navlink").forEach(a => {
+        if (!a) return;
         a.addEventListener("click", (ev) => {
           ev.preventDefault();
           const href = a.getAttribute("href");
@@ -1237,21 +1235,26 @@
       });
     }
 
-    const overlay = $("#overlay");
-    const sidebar = $("#sidebar");
+    let overlay;
+    let sidebar;
 
     function openSidebar() {
+      if (!sidebar || !overlay) return;
       sidebar.classList.add("open");
       overlay.classList.add("open");
       overlay.setAttribute("aria-hidden", "false");
     }
     function closeSidebar() {
+      if (!sidebar || !overlay) return;
       sidebar.classList.remove("open");
       overlay.classList.remove("open");
       overlay.setAttribute("aria-hidden", "true");
     }
 
     function setupSidebar() {
+      overlay = $("#overlay");
+      sidebar = $("#sidebar");
+      if (!overlay || !sidebar) return;
       $("#menuBtn").addEventListener("click", openSidebar);
       $("#closeSidebar").addEventListener("click", closeSidebar);
       overlay.addEventListener("click", closeSidebar);
@@ -1259,9 +1262,13 @@
     }
 
     function setupTopButtons() {
-      $("#themeBtn").addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark"));
-      $("#langBtn").addEventListener("click", () => applyLang(state.lang === "uz" ? "ru" : "uz"));
-      $("#voiceBtn").addEventListener("click", playRealAudioOrTTS);
+      const themeBtn = $("#themeBtn");
+      const langBtn = $("#langBtn");
+      const voiceBtn = $("#voiceBtn");
+
+      if (themeBtn) themeBtn.addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark"));
+      if (langBtn) langBtn.addEventListener("click", () => applyLang(state.lang === "uz" ? "ru" : "uz"));
+      if (voiceBtn) voiceBtn.addEventListener("click", playRealAudioOrTTS);
     }
 
     function ensureSplashFlow() {
@@ -1270,7 +1277,8 @@
     }
 
     function init() {
-      $("#year").textContent = String(new Date().getFullYear());
+      const yearEl = $("#year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
       applyTheme(state.theme);
       applyLang(state.lang);
 
@@ -1285,6 +1293,9 @@
     }
 
     init();
+
   </script>
+
+  
 </body>
 </html>
