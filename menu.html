@@ -142,6 +142,10 @@
       display:flex; align-items:center; gap: 10px;
       flex: 0 0 auto;
     }
+    @media (max-width: 420px){
+      .brand-title{ display:none; }
+      .menu-cta{ padding: 9px 10px; }
+    }
     .icon-btn{
       width: 44px; height: 44px;
       border-radius: 16px;
@@ -473,6 +477,7 @@
       border-radius: 14px;
     }
     .menu-actions .btn .ico{ color: #0b0f17; filter: none; }
+    .menu-actions .btn.food-cta .ico{ color: #041018; }
 
     .menu-card.food .menu-price{
       background: linear-gradient(135deg, rgba(58,160,255,.95), rgba(46,230,166,.92));
@@ -492,6 +497,15 @@
     .menu-nav .btn{
       padding: 10px 12px;
       border-radius: 999px;
+    }
+    .menu-cta{
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .menu-cta.is-hidden{
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-6px);
     }
 
     /* ===== Gallery ===== */
@@ -622,7 +636,11 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px" aria-hidden="true">
-    <symbol id="i-fish" viewBox="0 0 24 24">
+    <symbol id="i-chef" viewBox="0 0 24 24">
+      <path d="M7 10c-2 0-3-1.4-3-3 0-1.8 1.5-3 3-3 1 0 1.8.4 2.4 1.2.6-.8 1.4-1.2 2.6-1.2s2 .4 2.6 1.2C15.2 4.4 16 4 17 4c1.5 0 3 1.2 3 3 0 1.6-1 3-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 10h12v8a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-8Z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-fish-gold" viewBox="0 0 24 24">
       <path d="M4 12c2-5 7-7 11-6 2 .5 4 2 5 4-2 6-8 8-13 7-1.5-.2-3-1-3-5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
       <circle cx="17" cy="11" r="1.5" fill="currentColor"/>
     </symbol>
@@ -658,6 +676,22 @@
       <path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       <path d="M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 3l2.7 5.5 6.1.9-4.4 4.2 1 6.1L12 16.9 6.6 19.7l1-6.1L3.2 9.4l6.1-.9L12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-up" viewBox="0 0 24 24">
+      <path d="M12 6l-6 6m6-6 6 6M12 6v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-food" viewBox="0 0 24 24">
+      <path d="M4 3v7a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M10 3v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M14 3v6a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17 3v18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
   </svg>
 
 <!-- HEADER -->
@@ -666,7 +700,7 @@
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="Home">
           <div class="brand-badge" aria-hidden="true">
-            <svg class="ico big glow"><use href="#i-fish"></use></svg>
+            <svg class="ico big glow"><use href="#i-star"></use></svg>
           </div>
           <div class="brand-title">
             <strong data-i18n="brand">TOSHKENT BALIQCHI</strong>
@@ -676,7 +710,7 @@
 
         <div class="top-actions">
           <button class="icon-btn" id="langBtn" type="button" aria-label="Toggle language">
-            <svg class="ico big"><use href="#i-lang"></use></svg>
+            <svg class="ico big"><use href="#i-globe"></use></svg>
           </button>
 
           <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">
@@ -705,7 +739,7 @@
           <svg class="ico"><use href="#i-fish"></use></svg>
           <span data-i18n="navMenu">Baliqlar / Narxlar</span>
         </a>
-        <a href="index.html#gallery" class="navlink">
+        <a href="menu.html#gallery" class="navlink">
           <svg class="ico"><use href="#i-fish"></use></svg>
           <span data-i18n="navGallery">Galereya</span>
         </a>
@@ -779,6 +813,10 @@
     </div>
 
     <div class="menu-split">
+      <a class="btn menu-cta is-hidden" id="menuTopBtn" href="#top" style="justify-self:end;">
+        <svg class="ico"><use href="#i-up"></use></svg>
+        <span>Tepaga</span>
+      </a>
       <div class="menu-block fish" id="baliqlar">
         <div class="menu-block-head">
           <h3>Baliqlar</h3>
@@ -909,7 +947,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Bishteks</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -921,7 +959,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Gampan</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -933,7 +971,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Halim Moshkichra</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -945,7 +983,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Manti</h3>
               <div class="menu-price">12 000 so?m <small>/ dona</small></div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -957,7 +995,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Moxora</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -969,7 +1007,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Osh</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -981,7 +1019,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Suyuq Lag'mon</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -993,7 +1031,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Tabaka</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
 
@@ -1005,7 +1043,7 @@
             <div class="menu-body">
               <h3 class="menu-title">Tushonka</h3>
               <div class="menu-price">40 000 so?m</div>
-              <div class="menu-actions"><a class="btn primary" href="order.html">Buyurtma berish</a></div>
+              <div class="menu-actions"><a class="btn primary food-cta" href="order.html"><svg class="ico"><use href="#i-food"></use></svg>Buyurtma berish</a></div>
             </div>
           </article>
         </div>
@@ -1249,6 +1287,9 @@
         const val = i18n[lang]?.[key];
         if (typeof val === "string") node.textContent = val;
       });
+
+      const langBtn = $("#langBtn");
+      if (langBtn) langBtn.setAttribute("aria-label", lang === "ru" ? "Switch to Uzbek" : "Switch to Russian");
     }
 
     function playRealAudioOrTTS() {
@@ -1290,13 +1331,33 @@
       $$(".navlink").forEach(a => {
         if (!a) return;
         a.addEventListener("click", (ev) => {
-          ev.preventDefault();
           const href = a.getAttribute("href");
+          if (!href || !href.startsWith("#")) return;
+          ev.preventDefault();
           const target = $(href);
           closeSidebar();
           target?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
+    }
+
+    function setupMenuTopButton() {
+      const menuSection = $("#menu");
+      const menuTopBtn = $("#menuTopBtn");
+      if (!menuSection || !menuTopBtn) return;
+
+      const update = () => {
+        const rect = menuSection.getBoundingClientRect();
+        const viewH = window.innerHeight || document.documentElement.clientHeight;
+        const centerY = window.scrollY + viewH * 0.5;
+        const menuMid = window.scrollY + rect.top + rect.height * 0.5;
+        const shouldShow = centerY >= menuMid;
+        menuTopBtn.classList.toggle("is-hidden", !shouldShow);
+      };
+
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
     }
 
     let overlay;
@@ -1352,6 +1413,7 @@
       setupTopButtons();
       setupSmoothScroll();
       setupReveal();
+      setupMenuTopButton();
 
       if ("speechSynthesis" in window) window.speechSynthesis.onvoiceschanged = () => {};
       requestAnimationFrame(() => $$(".reveal").forEach(el => el.classList.add("in")));

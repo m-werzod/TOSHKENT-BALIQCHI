@@ -142,6 +142,25 @@
       display:flex; align-items:center; gap: 10px;
       flex: 0 0 auto;
     }
+    @media (max-width: 420px){
+      .brand-title{ display:none; }
+      .menu-cta{ padding: 9px 10px; }
+    }
+    .menu-cta{
+      border: 1px solid rgba(255,180,0,.45);
+      background: linear-gradient(135deg, rgba(255,223,122,.95), rgba(255,180,0,.92));
+      color: #1a1200;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      box-shadow: 0 14px 30px rgba(255,180,0,.18);
+      white-space: nowrap;
+    }
+    .menu-cta .ico{ color:#1a1200; filter:none; }
+    .menu-cta:hover{ filter: brightness(1.03); transform: translateY(-1px); }
     .icon-btn{
       width: 44px; height: 44px;
       border-radius: 16px;
@@ -515,11 +534,6 @@
       transition: transform .35s ease;
       filter: saturate(1.12) contrast(1.05);
     }
-    .gallery video{
-      width:100%; height:100%;
-      object-fit:cover;
-      display:block;
-    }
     .shot:hover img{ transform: scale(1.10); }
     .shot::after{
       content:"";
@@ -627,9 +641,12 @@
 
 <body>
 <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px" aria-hidden="true">
-    <symbol id="i-fish" viewBox="0 0 24 24">
-      <path d="M4 12c2-5 7-7 11-6 2 .5 4 2 5 4-2 6-8 8-13 7-1.5-.2-3-1-3-5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="17" cy="11" r="1.5" fill="currentColor"/>
+    <symbol id="i-chef" viewBox="0 0 24 24">
+      <path d="M7 10c-2 0-3-1.4-3-3 0-1.8 1.5-3 3-3 1 0 1.8.4 2.4 1.2.6-.8 1.4-1.2 2.6-1.2s2 .4 2.6 1.2C15.2 4.4 16 4 17 4c1.5 0 3 1.2 3 3 0 1.6-1 3-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 10h12v8a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-8Z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 3l2.7 5.5 6.1.9-4.4 4.2 1 6.1L12 16.9 6.6 19.7l1-6.1L3.2 9.4l6.1-.9L12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-phone" viewBox="0 0 24 24">
       <path d="M4 6.5c0 9 4.5 13.5 13.5 13.5 1 0 2-.6 2.3-1.6l.7-2.2c.2-.8-.1-1.6-.8-2l-2.3-1.1c-.7-.3-1.5-.2-2.1.3l-1 1c-2-1-3.4-2.4-4.4-4.4l1-1c.5-.6.6-1.4.3-2.1L10.1 2.8c-.4-.7-1.2-1-2-.8L5.9 2.7C4.9 3 4.3 4 4.3 5c0 .6-.3 1.1-.3 1.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -663,6 +680,15 @@
       <path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       <path d="M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>
+    </symbol>
   </svg>
 
   <!-- HEADER -->
@@ -671,7 +697,7 @@
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="Home">
           <div class="brand-badge" aria-hidden="true">
-            <svg class="ico big glow"><use href="#i-fish"></use></svg>
+            <svg class="ico big glow"><use href="#i-star"></use></svg>
           </div>
           <div class="brand-title">
             <strong data-i18n="brand">TOSHKENT BALIQCHI</strong>
@@ -680,16 +706,16 @@
         </a>
 
         <div class="top-actions">
+          <a class="menu-cta" href="menu.html#menu" aria-label="Menyuni ko‘rish">
+            <svg class="ico"><use href="#i-menu"></use></svg>
+            <span>Menyu</span>
+          </a>
           <button class="icon-btn" id="langBtn" type="button" aria-label="Toggle language">
-            <svg class="ico big"><use href="#i-lang"></use></svg>
+            <svg class="ico big"><use href="#i-globe"></use></svg>
           </button>
 
           <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">
             <svg class="ico big"><use href="#i-sun"></use></svg>
-          </button>
-
-          <button class="icon-btn" id="voiceBtn" type="button" aria-label="Voice">
-            <svg class="ico big"><use href="#i-voice"></use></svg>
           </button>
 
           <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu">
@@ -707,11 +733,11 @@
       <h3 data-i18n="navTitle">Menyu</h3>
       <div class="navlinks">
         <a href="menu.html#menu" class="navlink">
-          <svg class="ico"><use href="#i-fish"></use></svg>
+          <svg class="ico"><use href="#i-menu"></use></svg>
           <span data-i18n="navMenu">Baliqlar / Narxlar</span>
         </a>
-        <a href="#gallery" class="navlink">
-          <svg class="ico"><use href="#i-fish"></use></svg>
+        <a href="menu.html#gallery" class="navlink">
+          <svg class="ico"><use href="#i-pin"></use></svg>
           <span data-i18n="navGallery">Galereya</span>
         </a>
         <a href="#contact" class="navlink">
@@ -790,7 +816,7 @@
               </a>
 
               <a class="btn" href="menu.html#menu">
-                <svg class="ico big"><use href="#i-fish"></use></svg>
+                <svg class="ico big"><use href="#i-menu"></use></svg>
                 <span data-i18n="seeMenu">Menyuni ko‘rish</span>
               </a>
 
@@ -799,70 +825,6 @@
                 <span data-i18n="writeTelegram">Telegramga yozish</span>
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALLERY -->
-<section id="gallery" class="reveal">
-        <div class="section-head">
-          <div>
-            <h2 data-i18n="galleryTitle">Galereya</h2>
-            <p data-i18n="galleryHint">Kayfiyat • Ta’m • Issiq servis</p>
-          </div>
-          <p data-i18n="galleryNote">Rasimlari</p>
-        </div>
-
-        <div class="grid gallery">
-          <div class="card shot">
-            <img src="./images/Change1.png" alt="Change 1" />
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Yangi rasm</span></div>
-          </div>
-          <div class="card shot">
-            <img src="./images/Change2.png" alt="Change 2" />
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Yangi rasm</span></div>
-          </div>
-          <div class="card shot">
-            <img src="./images/image 02.png" alt="Cooked fish plate" />
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span data-i18n="g1">Issiq taom</span></div>
-          </div>
-          <div class="card shot">
-            <img src="./images/image02.png" alt="Grilled fish" />
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span data-i18n="g2">Mazza </span></div>
-          </div>
-          <div class="card shot">
-            <img src="./images/image03.png" alt="Fresh ingredients" />
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span data-i18n="g3">Toza mahsulot</span></div>
-          </div>
-          <div class="card shot">
-            <img src="./images/image4.png" alt="Restaurant ambiance" />
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span data-i18n="g4">Yoqimli muhit</span></div>
-          </div>
-
-          
-          <div class="card shot">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="./Videos/video2.mp4" type="video/mp4" />
-            </video>
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
-          </div>
-          <div class="card shot">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="./Videos/video3.mp4" type="video/mp4" />
-            </video>
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
-          </div>
-          <div class="card shot">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="./Videos/video4.mp4" type="video/mp4" />
-            </video>
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
-          </div>
-          <div class="card shot">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="./Videos/video5.mp4" type="video/mp4" />
-            </video>
-            <div class="cap"><svg class="ico"><use href="#i-fish"></use></svg><span>Video</span></div>
           </div>
         </div>
       </section>
@@ -903,8 +865,8 @@
           </div>
 
           <div class="card contact-item">
-            <div class="contact-ico" aria-hidden="true" style="background: linear-gradient(135deg, rgba(255,180,0,.14), rgba(255,77,109,.12));">
-              <svg class="ico big"><use href="#i-fish"></use></svg>
+            <div class="contact-ico" aria-hidden="true" style="background: linear-gradient(135deg, rgba(255,77,109,.16), rgba(58,160,255,.12));">
+              <svg class="ico big"><use href="#i-instagram"></use></svg>
             </div>
             <div class="contact-text">
               <strong>Instagram</strong>
@@ -1185,6 +1147,9 @@
         const val = i18n[lang]?.[key];
         if (typeof val === "string") node.textContent = val;
       });
+
+      const langBtn = $("#langBtn");
+      if (langBtn) langBtn.setAttribute("aria-label", lang === "ru" ? "Switch to Uzbek" : "Switch to Russian");
     }
 
     function playRealAudioOrTTS() {
@@ -1226,8 +1191,9 @@
       $$(".navlink").forEach(a => {
         if (!a) return;
         a.addEventListener("click", (ev) => {
-          ev.preventDefault();
           const href = a.getAttribute("href");
+          if (!href || !href.startsWith("#")) return;
+          ev.preventDefault();
           const target = $(href);
           closeSidebar();
           target?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1264,11 +1230,8 @@
     function setupTopButtons() {
       const themeBtn = $("#themeBtn");
       const langBtn = $("#langBtn");
-      const voiceBtn = $("#voiceBtn");
-
       if (themeBtn) themeBtn.addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark"));
       if (langBtn) langBtn.addEventListener("click", () => applyLang(state.lang === "uz" ? "ru" : "uz"));
-      if (voiceBtn) voiceBtn.addEventListener("click", playRealAudioOrTTS);
     }
 
     function ensureSplashFlow() {
